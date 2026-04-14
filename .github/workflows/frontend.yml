@@ -30,7 +30,7 @@ jobs:
           tags: sunilya96/react-frontend:latest
 
   deploy:
-    needs: build-and-push
+    needs: build
     runs-on: [self-hosted, linux, x64, aws_ec2]
 
     steps:
