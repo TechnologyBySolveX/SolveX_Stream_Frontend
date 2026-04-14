@@ -31,7 +31,7 @@ jobs:
 
   deploy:
     needs: build-and-push
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [self-hosted, linux, x64,ec2]
 
     steps:
       - name: Pull image from Docker Hub
@@ -49,6 +49,6 @@ jobs:
         run: |
           docker run -d \
             --name react-frontend \
-            -p 80:80 \
+            -p 3000:3000 \
             --restart unless-stopped \
             sunilya96/react-frontend:latest
