@@ -31,7 +31,7 @@ jobs:
 
   deploy:
     needs: build-and-push
-    runs-on: [self-hosted, linux, x64,ec2]
+    runs-on: [self-hosted, linux, x64, ec2]
 
     steps:
       - name: Pull image from Docker Hub
