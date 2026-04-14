@@ -1,6 +1,3 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
 name: Build & Deploy React Frontend
 
 on:
@@ -31,31 +28,27 @@ jobs:
           context: .
           push: true
           tags: sunilya96/react-frontend:latest
-deploy:
-    needs: build
-    runs-on: [self-hosted, linux, x64, ec2]
+
+  deploy:
+    needs: build-and-push
+    runs-on: [self-hosted, linux, x64]
 
     steps:
-
       - name: Pull image from Docker Hub
         run: docker pull sunilya96/react-frontend:latest
 
-      - name: Remove all <none> images
+      - name: Remove dangling images
         run: docker image prune -f
 
       - name: Stop & remove old container if exists
         run: |
-          docker ps -a --format '{{.Names}}' | grep -w react-frontend >/dev/null 2>&1 && \
-            docker stop react-frontend || true
-          docker ps -a --format '{{.Names}}' | grep -w react-frontend >/dev/null 2>&1 && \
-            docker rm react-frontend || true
+          docker stop react-frontend || true
+          docker rm react-frontend || true
 
-      
       - name: Run new container
         run: |
           docker run -d \
-          --name react-frontend \
-          -p 80:80 \
-          --restart unless-stopped \
-          react-frontend
-          sunilya96/react-frontend:latest
+            --name react-frontend \
+            -p 80:80 \
+            --restart unless-stopped \
+            sunilya96/react-frontend:latest
