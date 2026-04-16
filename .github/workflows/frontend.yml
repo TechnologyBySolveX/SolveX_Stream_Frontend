@@ -49,6 +49,6 @@ jobs:
         run: |
           docker run -d \
             --name react-frontend \
-            -p 3000:3000 \
+            -p 80:80 \
             --restart unless-stopped \
             sunilya96/react-frontend:latest
