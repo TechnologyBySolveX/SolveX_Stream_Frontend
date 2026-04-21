@@ -3,6 +3,7 @@ import Home from './features/auth/Home';
 import Login from './features/auth/Login';
 import Signup from './features/auth/Signup';
 import Profile from './features/auth/Profile';
+import UserList from './features/auth/UserList';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/userList" element={<UserList />} />
     </Routes>
   );
 }
