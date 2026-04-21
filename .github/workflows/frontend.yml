@@ -6,6 +6,9 @@ on:
       - main
 
 jobs:
+# =======================
+# CI JOB: BUILD & PUSH
+# =======================
   build:
     runs-on: ubuntu-latest
 
@@ -28,7 +31,12 @@ jobs:
           context: .
           push: true
           tags: sunilya96/react-frontend:latest
+          build-args: |
+            REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }}
 
+# =======================
+# CD JOB: DEPLOY ON EC2
+# =======================
   deploy:
     needs: build
     runs-on: [self-hosted, linux, x64, frontend, aws_ec2]
@@ -40,7 +48,7 @@ jobs:
       - name: Remove dangling images
         run: docker image prune -f
 
-      - name: Stop & remove old container if exists
+      - name: Stop and remove old container if exists
         run: |
           docker stop react-frontend || true
           docker rm react-frontend || true
