@@ -12,6 +12,7 @@ function Home() {
         <ul className="nav-links">
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/signup">Sign Up</Link></li>
+            <li><Link to="/userList">UserList</Link></li>
         </ul>
 
       </nav>
