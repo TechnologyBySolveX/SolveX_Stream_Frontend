@@ -13,9 +13,10 @@ function UserList() {
       });
 
       if (!response.ok) {
+        console.log("If response is not OK Then");
         throw new Error("Failed to fetch users");
       }
-
+      console.log("Outer Side of After get Request Okay;;");
       const data = await response.json();
       setUsers(data);
       setMessage("Users loaded successfully!");
