@@ -7,7 +7,10 @@ function UserList() {
   const handleFetchUsers = async () => {
     try {
       console.log("Inside the Try block for fetching All user..")
-      
+      const response = await fetch("http://16.112.150.220:8080/api/auth", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      });
 
       if (!response.ok) {
         console.log("If response is not OK Then");
