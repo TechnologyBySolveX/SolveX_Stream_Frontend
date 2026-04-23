@@ -9,7 +9,7 @@ function Signup() {
 
   const handleSignup = async () => {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-    const response = await fetch("http://16.112.150.220:8080/api/auth/signup", {
+    const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userName, password })

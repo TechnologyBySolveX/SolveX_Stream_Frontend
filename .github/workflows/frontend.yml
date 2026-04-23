@@ -31,7 +31,9 @@ jobs:
           context: .
           push: true
           tags: sunilya96/react-frontend:latest
-          
+          build-args: |
+            REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }}
+
 # =======================
 # CD JOB: DEPLOY ON EC2
 # =======================
@@ -40,7 +42,7 @@ jobs:
     runs-on: [self-hosted, linux, x64, frontend, aws_ec2]
 
     steps:
-      - name: Pull image from Docker Hub
+      - name: Pull latest image from Docker Hub
         run: docker pull sunilya96/react-frontend:latest
 
       - name: Remove dangling images
